@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#0f172a" />
+  <circle cx="256" cy="256" r="180" fill="url(#grad)" opacity="0.15" />
+  <g transform="translate(106, 106)" stroke="url(#grad)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">
+    <!-- Stylized Neural Brain / Knowledge Network Nodes -->
+    <path d="M150 40 C90 40 50 85 50 145 C50 185 75 220 110 235 C110 250 120 260 150 260 C175 260 190 245 200 230" />
+    <path d="M150 40 C210 40 250 85 250 145 C250 185 225 220 190 235 C190 250 180 260 150 260" />
+    <circle cx="150" cy="110" r="14" fill="#06b6d4" />
+    <circle cx="95" cy="155" r="12" fill="#7c3aed" />
+    <circle cx="205" cy="155" r="12" fill="#4f46e5" />
+    <circle cx="150" cy="205" r="14" fill="#a855f7" />
+    <line x1="150" y1="110" x2="95" y2="155" />
+    <line x1="150" y1="110" x2="205" y2="155" />
+    <line x1="95" y1="155" x2="150" y2="205" />
+    <line x1="205" y1="155" x2="150" y2="205" />
+  </g>
+</svg>

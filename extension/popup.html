@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Human Cache Capture</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { width: 340px; background: #0f172a; color: #f8fafc; padding: 16px; font-size: 13px; }
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #1e293b; }
+    .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; color: #fff; }
+    .header-actions { display: flex; align-items: center; gap: 6px; }
+    .badge { font-size: 10px; padding: 2px 6px; border-radius: 6px; background: #4f46e5; color: #fff; font-weight: 600; }
+    .icon-btn { background: none; border: none; color: #94a3b8; cursor: pointer; padding: 2px; font-size: 13px; border-radius: 4px; }
+    .icon-btn:hover { color: #fff; background: #1e293b; }
+    .status-card { background: #1e293b; border-radius: 12px; padding: 12px; margin-bottom: 14px; border: 1px solid #334155; }
+    .status-text { font-size: 11px; color: #94a3b8; display: flex; align-items: center; gap: 6px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+    .status-dot.offline { background: #ef4444; }
+    .form-group { margin-bottom: 12px; }
+    label { display: block; font-size: 11px; font-weight: 600; color: #94a3b8; margin-bottom: 4px; }
+    input[type="text"], input[type="password"] { width: 100%; padding: 8px 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 12px; }
+    input:focus { outline: none; border-color: #6366f1; }
+    .btn { width: 100%; padding: 10px; border-radius: 10px; border: none; font-weight: 600; font-size: 12px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-primary { background: #4f46e5; color: white; margin-bottom: 8px; }
+    .btn-primary:hover { background: #4338ca; }
+    .btn-secondary { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
+    .btn-secondary:hover { background: #334155; }
+    .footer { font-size: 10px; color: #64748b; text-align: center; margin-top: 14px; }
+    .auth-box { display: none; }
+    .settings-panel { display: none; background: #1e293b; padding: 12px; border-radius: 10px; margin-bottom: 12px; border: 1px solid #334155; }
+    .alert { padding: 8px; border-radius: 8px; font-size: 11px; margin-bottom: 10px; }
+    .alert-success { background: #064e3b; color: #6ee7b7; border: 1px solid #047857; }
+    .alert-error { background: #7f1d1d; color: #fca5a5; border: 1px solid #b91c1c; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <span>🧠 Human Cache</span>
+    </div>
+    <div class="header-actions">
+      <button id="btnToggleSettings" class="icon-btn" title="API Settings">⚙️</button>
+      <span class="badge">v1.0.1</span>
+    </div>
+  </div>
+
+  <div id="alertBox" class="alert" style="display: none;"></div>
+
+  <!-- Settings Panel (Collapsible) -->
+  <div id="settingsPanel" class="settings-panel">
+    <div class="form-group">
+      <label>Backend Server URL</label>
+      <input type="text" id="settingApiUrl" placeholder="http://127.0.0.1:8000" />
+      <span style="font-size: 10px; color: #64748b; margin-top: 2px; display: block;">Default: http://127.0.0.1:8000</span>
+    </div>
+    <button id="btnSaveSettings" class="btn btn-secondary" style="padding: 6px; font-size: 11px;">Save API URL</button>
+  </div>
+
+  <!-- Connection Status -->
+  <div class="status-card">
+    <div class="status-text">
+      <span id="statusDot" class="status-dot"></span>
+      <span id="statusLabel">Checking connection to Human Cache...</span>
+    </div>
+  </div>
+
+  <!-- Main Capture Action Form -->
+  <div id="captureForm">
+    <div class="form-group">
+      <label>Page Title</label>
+      <input type="text" id="pageTitle" readonly />
+    </div>
+
+    <div class="form-group">
+      <label>Page URL</label>
+      <input type="text" id="pageUrl" readonly />
+    </div>
+
+    <button id="btnCaptureCurrentPage" class="btn btn-primary">
+      <span>⚡ Save Page to Human Cache</span>
+    </button>
+
+    <button id="btnOpenWebApp" class="btn btn-secondary">
+      <span>Open Human Cache Vault ↗</span>
+    </button>
+  </div>
+
+  <!-- Login Form (if not logged in) -->
+  <div id="authBox" class="auth-box">
+    <p style="font-size: 11px; color: #94a3b8; margin-bottom: 10px;">Please log in with your Human Cache account to save captures:</p>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" id="authEmail" placeholder="you@example.com" />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="authPassword" placeholder="••••••••" />
+    </div>
+    <button id="btnLogin" class="btn btn-primary">Log In</button>
+  </div>
+
+  <div class="footer">
+    Privacy-First • No Automatic History Collection
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

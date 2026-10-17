@@ -1,0 +1,1 @@
+Neural networks utilize backpropagation and gradient descent to iteratively minimize loss functions in supervised learning.

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: humancache-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_NAME=Human Cache
+      - API_V1_STR=/api/v1
+      - DATABASE_URL=sqlite:///./storage/human_cache.db
+      - STORAGE_DIR=./storage
+      - SECRET_KEY=replace-with-a-super-secret-key-in-prod
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=gemini-3.8-flash
+      - LLM_PROVIDER=gemini
+    volumes:
+      - backend-storage:/app/storage
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: humancache-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-storage:
